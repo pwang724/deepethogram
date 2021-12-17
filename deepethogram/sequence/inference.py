@@ -190,7 +190,7 @@ def extract(model,
 
     class_names = [n.encode("ascii", "ignore") for n in class_names]
 
-    for i in tqdm(range(len(outputfiles))):
+    for i in tqdm(range(len(outputfiles)), position=0, leave=True):
         outputfile = outputfiles[i]
         log.info('running inference on {}. latent name: {} output name: {}...'.format(
             outputfile, latent_name, output_name))

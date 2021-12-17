@@ -68,11 +68,11 @@ def try_load_all_frames(datadir: Union[str, os.PathLike]):
     """
     log.info('Iterating through all frames of all movies to test for frame reading bugs')
     records = projects.get_records_from_datadir(datadir)
-    for key, record in tqdm(records.items()):
+    for key, record in tqdm(records.items(), position=0, leave=True):
         with VideoReader(record['rgb']) as reader:
             log.info('reading all frames from file {}'.format(record['rgb']))
             had_error = False
-            for i in tqdm(range(len(reader)), leave=False):
+            for i in tqdm(range(len(reader)), position=0, leave=True):
                 try:
                     frame = reader[i]
                 except Exception as e:

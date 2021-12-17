@@ -215,7 +215,7 @@ def predict_single_video(videofile: Union[str, os.PathLike],
                             num_workers=num_workers,
                             sequence_length=num_rgb,
                             mean_by_channels=mean_by_channels)
-    dataloader = DataLoader(dataset, num_workers=num_workers, batch_size=batch_size)
+    dataloader = DataLoader(dataset, batch_size=batch_size)
     video_frame_num = len(dataset)
 
     activation = unpack_penultimate_layer(model, fusion)
@@ -224,7 +224,7 @@ def predict_single_video(videofile: Union[str, os.PathLike],
 
     has_printed = False
     # log.debug('model training mode: {}'.format(model.training))
-    for i, batch in enumerate(tqdm(dataloader, leave=False)):
+    for i, batch in enumerate(tqdm(dataloader, position=0, leave=True)):
         if isinstance(batch, dict):
             images = batch['images']
         elif isinstance(batch, torch.Tensor):
@@ -386,7 +386,7 @@ def extract(rgbs: list,
 
     log.debug('model training mode: {}'.format(model.training))
     # iterate over movie files
-    for i in tqdm(range(len(rgbs))):
+    for i in tqdm(range(len(rgbs)), position=0, leave=True):
         rgb = rgbs[i]
 
         basename = os.path.splitext(rgb)[0]

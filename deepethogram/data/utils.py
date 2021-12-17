@@ -158,7 +158,7 @@ def extract_metadata(splitdir, allmovies=None, is_flow=False, num_workers=32):
     action_indices = []
 
     with mp.Pool(num_workers) as pool:
-        for action_index, action in enumerate(tqdm(actions)):
+        for action_index, action in enumerate(tqdm(actions), position=0, leave=True):
             action_dir = os.path.join(splitdir, action)
             movies = [i for i in allmovies if action_dir in i]
 

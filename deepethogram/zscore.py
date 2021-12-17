@@ -97,7 +97,7 @@ def get_video_statistics(videofile, stride):
     image_stats = StatsRecorder()
     with deepethogram.file_io.VideoReader(videofile) as reader:
         log.debug('N frames: {}'.format(len(reader)))
-        for i in tqdm(range(0, len(reader), stride)):
+        for i in tqdm(range(0, len(reader), stride), position=0, leave=True):
             try:
                 image = reader[i]
             except Exception as e:

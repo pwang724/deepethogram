@@ -56,7 +56,7 @@ def extract_movie(in_video,
 
     # log.debug('model training mode: {}'.format(model.training))
     with VideoWriter(out_video, movie_format) as vid:
-        for i, batch in enumerate(tqdm(dataloader, leave=False)):
+        for i, batch in enumerate(tqdm(dataloader, position=0, leave=True)):
             if isinstance(batch, dict):
                 images = batch['images']
             elif isinstance(batch, torch.Tensor):
@@ -202,7 +202,7 @@ def flow_generator_inference(cfg):
     maxval = 5
     polar = True
     save_rgb_side_by_side = True
-    for movie in tqdm(rgb):
+    for movie in tqdm(rgb, position=0, leave=True):
         out_video = os.path.splitext(movie)[0] + '_flows'
         if movie_format == 'directory':
             pass

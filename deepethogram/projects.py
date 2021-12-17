@@ -1205,7 +1205,7 @@ def convert_all_videos(config_file: Union[str, os.PathLike], movie_format='hdf5'
 
     records = get_records_from_datadir(
         os.path.join(project_config['project']['path'], project_config['project']['data_path']))
-    for key, record in tqdm(records.items(), desc='converting videos'):
+    for key, record in tqdm(records.items(), desc='converting videos', position=0, leave=True):
         videofile = record['rgb']
         try:
             convert_video(videofile, movie_format=movie_format, **kwargs)
