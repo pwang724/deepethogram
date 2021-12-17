@@ -52,7 +52,7 @@ def extract_movie(in_video,
                             num_workers=num_workers,
                             sequence_length=num_rgb,
                             mean_by_channels=mean_by_channels)
-    dataloader = DataLoader(dataset, num_workers=num_workers, batch_size=batch_size)
+    dataloader = DataLoader(dataset, batch_size=batch_size)
 
     # log.debug('model training mode: {}'.format(model.training))
     with VideoWriter(out_video, movie_format) as vid:
